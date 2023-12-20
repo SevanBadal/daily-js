@@ -1,6 +1,12 @@
 const solveMaze = (maze, start, end) => {
     const rows = maze.length;
     const columns = maze[0].length;
+    
+    // short circuit if start coordinate is out of bounds
+    if ((start[0] > rows) || start[1] > columns) return []
+    // short circuit if start coordinate is a wall
+    if (maze[start[0]][start[1]] === 0) return []
+
     const visited = new Array(rows).fill(false).map(() => new Array(columns).fill(false));
     const trail = new Array(rows).fill(null).map(() => new Array(columns).fill(null));
     const queue = [start];
