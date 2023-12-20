@@ -1,3 +1,10 @@
+const maze = [
+    [1, 0, 0, 1], 
+    [1, 1, 1, 1], 
+    [0, 1, 0, 1], 
+    [1, 1, 1, 1]
+]
+
 const solveMaze = (maze, start, end) => {
     const rows = maze.length;
     const columns = maze[0].length;
@@ -9,6 +16,7 @@ const solveMaze = (maze, start, end) => {
 
     const visited = new Array(rows).fill(false).map(() => new Array(columns).fill(false));
     const trail = new Array(rows).fill(null).map(() => new Array(columns).fill(null));
+    const track = []
     const queue = [start];
     visited[start[0]][start[1]] = true;
     const directions = [
@@ -20,13 +28,14 @@ const solveMaze = (maze, start, end) => {
     while (queue.length > 0) {
         const [x, y] = queue.shift();
         if (x === end[0] && y === end[1]) {
-            // current coordinate is the end coordinate!
-            // filter out the null values in the trail array
-            const path = trail.reduce((acc, curr) => {
-                const visitedCoordinates = curr.filter(x => !!x)
-                return [...acc, ...visitedCoordinates]
-            },[])
-            return [...path, [x, y]]
+            // Backtrack from the end to the start
+            let path = [];
+            let current = [x, y];
+            while (current !== null) {
+                path.push(current);
+                current = trail[current[0]][current[1]];
+            }
+            return path.reverse();
         }
         // attempt to traverse the maze in each direction
         directions.forEach(([dx, dy]) => {
