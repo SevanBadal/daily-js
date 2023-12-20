@@ -13,7 +13,6 @@ const solveMaze = (maze, start, end) => {
     ];
     while (queue.length > 0) {
         const [x, y] = queue.shift();
-
         if (x === end[0] && y === end[1]) {
             // current coordinate is the end coordinate!
             // filter out the null values in the trail array
