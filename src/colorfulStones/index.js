@@ -9,16 +9,16 @@ const colorfulStones = (stoneList) => {
     });
 
     // Get array of values
-    let highestValue = 0;
+    let lowestValue = Infinity;
     for (const count of Object.values(counterObject)) {
-        if (count > highestValue) {
-            highestValue = count;
+        if (count < lowestValue) {
+            lowestValue = count;
         }
     }
 
     // Find keys with the highest count and sort them
     return Object.entries(counterObject)
-                 .filter(([key, value]) => value === highestValue)
+                 .filter(([key, value]) => value === lowestValue)
                  .map(([key]) => key.toUpperCase())
                  .sort();
 };
