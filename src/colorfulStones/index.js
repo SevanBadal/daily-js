@@ -16,7 +16,7 @@ const colorfulStones = (stoneList) => {
         }
     }
 
-    // Find keys with the highest count and sort them
+    // Find keys with the lowest count and sort them
     return Object.entries(counterObject)
                  .filter(([key, value]) => value === lowestValue)
                  .map(([key]) => key.toUpperCase())
