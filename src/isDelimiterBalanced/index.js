@@ -8,7 +8,7 @@ const tokenMap = {
 const isDelimiterBalanced = (expression) => {
     const tokens = expression.split("")
     const stack = []
-    const matchingClosingDelimiters = tokens.every(currentToken => {
+    const didPushPopCompleteWithoutMismatch = tokens.every(currentToken => {
         const openDelimiter = tokenMap[currentToken]
         if (openDelimiter){
             return stack.push(openDelimiter)
@@ -17,7 +17,7 @@ const isDelimiterBalanced = (expression) => {
             return currentToken === lastExpectedClosedDelimiter
         }
     })
-    return matchingClosingDelimiters && stack.length === 0
+    return didPushPopCompleteWithoutMismatch && stack.length === 0
 }
 
 module.exports = isDelimiterBalanced
