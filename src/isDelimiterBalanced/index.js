@@ -1,5 +1,3 @@
-const open = ["(", "[", "{"]
-const close = [")", "]", "}"]
 const tokenMap = {
     '(': ')',
     '{': '}',
