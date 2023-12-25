@@ -2,7 +2,6 @@ const mergeSortedArrays = (listA, listB) => {
     // short circuit if one list is empty (assuming both arrays are sorted)
     if (listA.length === 0) return listB
     if (listB.length === 0) return listA
-    // initialize array for quicksort
     const mergedList =  [...listA, ...listB]
     return selectionSort(mergedList)
 }
