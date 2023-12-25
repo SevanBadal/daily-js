@@ -4,7 +4,10 @@ const mergeSortedArrays = (listA, listB) => {
     if (listB.length === 0) return listA
     // initialize array for quicksort
     const mergedList =  [...listA, ...listB]
+    return selectionSort(mergedList)
+}
 
+const insertionSort = (mergedList) => {
     return mergedList.reduce((sortedArray, current) => {
         // no elements in our sortedArray (accumulator), so push current in
         if (sortedArray.length === 0) {
@@ -28,6 +31,29 @@ const mergeSortedArrays = (listA, listB) => {
         }
         return sortedArray
     }, [])
+}
+
+const selectionSort = (unsorted) => {
+    const tempArray = [...unsorted]
+    let sortedArray = []
+    // loop over incoming list, removing smallest element one iteration at a time
+    while (tempArray.length > 0) {
+        // find smallest element and index in current iteration
+        const smallest = tempArray.reduce((acc, value, index) => {
+            if (value < acc.value) {
+                return {
+                    value,
+                    index
+                }
+            }
+            return acc
+        }, {value: Infinity, index: -1})
+        // add smallest element to sorted array
+        sortedArray.push(smallest.value)
+        // remove smallest element from incoming list
+        tempArray.splice(smallest.index, 1)
+    }
+    return sortedArray
 }
 
 module.exports = mergeSortedArrays
