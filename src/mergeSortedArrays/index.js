@@ -2,8 +2,7 @@ const mergeSortedArrays = (listA, listB) => {
     // short circuit if one list is empty (assuming both arrays are sorted)
     if (listA.length === 0) return listB
     if (listB.length === 0) return listA
-    const mergedList =  [...listA, ...listB]
-    return selectionSort(mergedList)
+    return optimizedSort(listA, listB)
 }
 
 const insertionSort = (mergedList) => {
@@ -30,6 +29,32 @@ const insertionSort = (mergedList) => {
         }
         return sortedArray
     }, [])
+}
+
+const optimizedSort = (sortedListOne, sortedListTwo) => {
+    let listOneIndex = 0
+    let listTwoIndex = 0
+    const mergedSortedList = [] 
+    while(listOneIndex < sortedListOne.length && listTwoIndex < sortedListTwo.length) {
+        const listOneElement = sortedListOne[listOneIndex]
+        const listTwoElement = sortedListTwo[listTwoIndex]
+        if (listOneElement < listTwoElement) {
+            mergedSortedList.push(listOneElement)
+            listOneIndex++
+        } else {
+            mergedSortedList.push(listTwoElement)
+            listTwoIndex++
+        }
+    }
+    // cleanup list one if needed
+    for(listOneIndex; listOneIndex < sortedListOne.length; listOneIndex++) {
+        mergedSortedList.push(sortedListOne[listOneIndex])
+    }
+    // cleanup list two if needed
+    for(listTwoIndex; listTwoIndex < sortedListTwo.length; listTwoIndex++) {
+        mergedSortedList.push(sortedListTwo[listTwoIndex])
+    }
+    return mergedSortedList
 }
 
 const selectionSort = (unsorted) => {
